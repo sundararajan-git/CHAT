@@ -1,59 +1,48 @@
-import { FaUserSecret } from "react-icons/fa";
+import userSvg from "../../../ASSETES/user.svg";
 
 const SideBar = () => {
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
-      <div className="border-b border-base-300 w-full p-5">
+      <div className="w-full p-3">
         <div className="flex items-center gap-2">
-          <FaUserSecret className="size-6" />
-          <span className="font-medium hidden lg:block">Contacts</span>
-        </div>
-        {/* TODO: Online filter toggle */}
-        <div className="mt-3 hidden lg:flex items-center gap-2">
-          <label className="cursor-pointer flex items-center gap-2">
-            <input type="checkbox" className="checkbox checkbox-sm" />
-            <span className="text-sm">Show online only</span>
-          </label>
-          <span className="text-xs text-zinc-500">(21 online)</span>
+          <span className="font-medium hidden lg:block uppercase">Members</span>
         </div>
       </div>
 
-      <div className="overflow-y-auto w-full py-3">
-        {[1, 2, 3, 4, 5].map((user) => (
-          <button
-            key={user}
-            className={`
+      <div className="overflow-y-auto w-full p-1.5">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
+          (user) => (
+            <button
+              key={user}
+              className={`
               w-full p-3 flex items-center gap-3
               hover:bg-base-300 transition-colors
               ${true ? "bg-base-300 ring-1 ring-base-300" : ""}
             `}
-          >
-            <div className="relative mx-auto lg:mx-0">
-              <img
-                // src={user.profilePiFc || "/avatar.png"}
-                // alt={user.name}
-                className="size-12 object-cover rounded-full"
-              />
-              {true && (
-                <span
-                  className="absolute bottom-0 right-0 size-3 bg-green-500 
-                  rounded-full ring-2 ring-zinc-900"
+            >
+              <div className="relative mx-auto lg:mx-0">
+                <img
+                  src={false || userSvg}
+                  alt={"user"}
+                  className="size-10 object-cover rounded-full"
                 />
-              )}
-            </div>
-
-            {/* User info - only visible on larger screens */}
-            <div className="hidden lg:block text-left min-w-0">
-              <div className="font-medium truncate">{"Arun Kumar"}</div>
-              <div className="text-sm text-zinc-400">
-                {true ? "Online" : "Offline"}
+                {true && (
+                  <span
+                    className="absolute bottom-1 right-0 size-2 bg-green-500 
+                  rounded-full ring-2 ring-zinc-900"
+                  />
+                )}
               </div>
-            </div>
-          </button>
-        ))}
 
-        {true && (
-          <div className="text-center text-zinc-500 py-4">No online users</div>
+              {/* User info - only visible on larger screens */}
+              <div className="hidden lg:block text-left min-w-0">
+                <div className="font-medium truncate text-sm">{"Arun Kumar"}</div>
+                <div className="text-sm text-zinc-400">
+                  {true ? "Online" : "Offline"}
+                </div>
+              </div>
+            </button>
+          )
         )}
       </div>
     </aside>

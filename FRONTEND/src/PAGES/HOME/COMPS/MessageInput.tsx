@@ -6,12 +6,12 @@ const MessageInput = () => {
 
   return (
     <div className="p-4 w-full">
-      {true && (
+      {/* {true && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
             <img
-              alt="Preview"
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
+              alt="Preview"
             />
             <button
               className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300
@@ -22,13 +22,13 @@ const MessageInput = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
       <form className="flex items-center gap-2">
         <div className="flex-1 flex gap-2">
           <input
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
+            className="w-full input input-bordered rounded-lg input-sm sm:input-md focus:outline-none focus:ring-1 focus:ring-pink-700"
             placeholder="Type a message..."
           />
           <input

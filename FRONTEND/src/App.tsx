@@ -6,15 +6,13 @@ import SignUp from "./PAGES/SIGNUP/SignUp";
 import Login from "./PAGES/LOGIN/Login";
 import Settings from "./PAGES/SETTINGS/Settings";
 import Profile from "./PAGES/PROFILE/Profile";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
-
-  const authUser = true;
-
+  const authUser = !true;
 
   return (
-    <div>
-
+    <div className="flex flex-col justify-between h-screen">
       {/* <NavBar /> */}
 
       <Routes>
@@ -36,6 +34,7 @@ const App = () => {
           element={authUser ? <Profile /> : <Navigate to="/login" />}
         />
       </Routes>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

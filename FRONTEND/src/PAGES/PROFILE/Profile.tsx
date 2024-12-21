@@ -1,21 +1,20 @@
-import { BiCamera, BiMailSend, BiUser } from "react-icons/bi";
+import { BiCamera } from "react-icons/bi";
+import userSvg from "../../ASSETES/user.svg";
 
 const Profile = () => {
   return (
     <div className="h-screen pt-20">
       <div className="max-w-2xl mx-auto p-4 py-8">
-        <div className="bg-base-300 rounded-xl p-6 space-y-8">
+        <div className="bg-base-300 rounded-xl p-6 space-y-4">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold ">Profile</h1>
+            <h1 className="text-2xl font-semibold text-pink-700">Profile</h1>
             <p className="mt-2">Your profile information</p>
           </div>
-
-          {/* avatar upload section */}
 
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
-                // src={selectedImg || authUser.profilePic || "/avatar.png"}
+                src={false || userSvg}
                 alt="Profile"
                 className="size-32 rounded-full object-cover border-4 "
               />
@@ -45,34 +44,26 @@ const Profile = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
-            <div className="space-y-1.5">
-              <div className="text-sm text-zinc-400 flex items-center gap-2">
-                <BiUser className="w-4 h-4" />
-                Full Name
+          <div className="bg-base-300 rounded-xl p-2">
+            <h2 className="text-lg font-medium  mb-4">Profile Information</h2>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center justify-between py-2 border-b border-zinc-700">
+                <span>Full Name</span>
+                <span>Arun Kumar</span>
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">
-                Arun Kumar
-              </p>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="text-sm text-zinc-400 flex items-center gap-2">
-                <BiMailSend className="w-4 h-4" />
-                Email Address
+              <div className="flex items-center justify-between py-2">
+                <span>Email Address</span>
+                <span>abc@gmail.com</span>
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">
-                abc@gmail.com
-              </p>
             </div>
           </div>
 
-          <div className="mt-6 bg-base-300 rounded-xl p-6">
+          <div className="bg-base-300 rounded-xl p-2">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
                 <span>Member Since</span>
-                <span>{12/12/2024}</span>
+                <span>{"12/12/2024"}</span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span>Account Status</span>

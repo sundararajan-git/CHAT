@@ -38,6 +38,6 @@ export const validateForm = (form: any) => {
 
 // ------------  FOR NUMBER INPUT FILED SCROLL TO CHANGE PREVENT -------
 
-export const handleWheel = (e:any) => {
+export const handleWheel = (e: any) => {
     e.target.blur();
 };

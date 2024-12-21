@@ -2,11 +2,12 @@ import { useRef } from "react";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./SKELETONS/MessageSkeleton";
+import userSvg from "../../../ASSETES/user.svg"
 
 const ChatContainer = () => {
   const messageEndRef = useRef(null);
 
-  if (true) {
+  if (!true) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
         <ChatHeader />
@@ -29,14 +30,7 @@ const ChatContainer = () => {
           >
             <div className=" chat-image avatar">
               <div className="size-10 rounded-full border">
-                <img
-                  // src={
-                  //   message.senderId === authUser._id
-                  //     ? authUser.profilePic || "/avatar.png"
-                  //     : selectedUser.profilePic || "/avatar.png"
-                  // }
-                  alt="profile pic"
-                />
+                <img src={userSvg} alt="profile pic" />
               </div>
             </div>
             <div className="chat-header mb-1">
@@ -44,8 +38,8 @@ const ChatContainer = () => {
                 {/* {formatMessageTime(message.createdAt)} */}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col">
-              {true && (
+            <div className="chat-bubble bg-pink-700 flex flex-col">
+              {!true && (
                 <img
                   // src={message.image}
                   alt="Attachment"

@@ -1,4 +1,4 @@
-import { BiMessageSquare } from "react-icons/bi";
+import logoSvg from "../../../ASSETES/logo.svg";
 
 const NoChatSelected = () => {
   return (
@@ -7,20 +7,13 @@ const NoChatSelected = () => {
         {/* Icon Display */}
         <div className="flex justify-center gap-4 mb-4">
           <div className="relative">
-            <div
-              className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center
-             justify-center animate-bounce"
-            >
-              <BiMessageSquare className="w-8 h-8 text-primary " />
-            </div>
+            <img src={logoSvg} alt="logo" className="animate-spin" />
           </div>
         </div>
 
         {/* Welcome Text */}
-        <h2 className="text-2xl font-bold">Welcome to Chatty!</h2>
-        <p className="text-base-content/60">
-          Select a conversation from the sidebar to start chatting
-        </p>
+        <h2 className="text-2xl font-bold">Welcome to Chat!</h2>
+        <p className="text-base-content/60">Start chatting</p>
       </div>
     </div>
   );
