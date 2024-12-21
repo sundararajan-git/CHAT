@@ -10,7 +10,7 @@ import { validateForm } from "../../COMMON/Helper";
 
 const SignUp = () => {
   // CONTROL THE COMPONENT
-  const [contol, setControl] = useState({
+  const [control, setControl] = useState({
     btnloading: false,
     showpassword: false,
   });
@@ -117,7 +117,7 @@ const SignUp = () => {
                 <MdOutlineLockPerson className="size-5 text-gray-700" />
               </div>
               <input
-                type={contol?.showpassword ? "text" : "password"}
+                type={control?.showpassword ? "text" : "password"}
                 className={`input border-gray-300 w-full pl-10 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-green-400 text-sm`}
                 id="password"
                 name="password"
@@ -129,7 +129,7 @@ const SignUp = () => {
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
                 onClick={passwordShowHandler}
               >
-                {contol?.showpassword ? (
+                {control?.showpassword ? (
                   <FaRegEyeSlash className="size-5 text-base-content/40" />
                 ) : (
                   <FaRegEye className="size-5 text-base-content/40" />
@@ -144,8 +144,8 @@ const SignUp = () => {
               className="btn bg-green-500 hover:bg-green-600 w-full text-white"
               onClick={createAccountHandler}
             >
-              {contol.btnloading && <BtnLoader />}
-              {contol.btnloading ? "Loading..." : "Create Account"}
+              {control.btnloading && <BtnLoader />}
+              {control.btnloading ? "Loading..." : "Create Account"}
             </button>
           </div>
         </form>
