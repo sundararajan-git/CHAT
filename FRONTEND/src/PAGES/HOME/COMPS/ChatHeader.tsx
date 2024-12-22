@@ -1,30 +1,39 @@
-import { BiX } from "react-icons/bi";
-
+import { IoIosCall } from "react-icons/io";
+import userSvg from "../../../ASSETES/user.svg"
+import { IoChevronBackOutline, IoVideocamOutline } from "react-icons/io5";
+import { BsThreeDotsVertical } from "react-icons/bs";
 const ChatHeader = () => {
   return (
-    <div className="p-2.5 border-b border-base-300">
+    <div className="p-2.5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          {/* Avatar */}
+
+
+          <div className="cursor-pointer p-2">
+            <IoChevronBackOutline size={18} />
+          </div>
+
           <div className="avatar">
             <div className="size-10 rounded-full relative">
-              <img alt={"asdfas"} />
+              <img  src={userSvg} alt={"asdfas"} />
             </div>
           </div>
 
-          {/* User info */}
           <div>
             <h3 className="font-medium">{"Arun Kumar"}</h3>
-            <p className="text-sm text-base-content/70">
+            <p className="text-sm text-green-600">
               {true ? "Online" : "Offline"}
             </p>
           </div>
         </div>
 
-        {/* Close button */}
-        <button>
-          <BiX />
-        </button>
+
+        <div className="flex items-center gap-6">
+          <IoVideocamOutline  size={18}/>
+          <IoIosCall size={18} />
+          <BsThreeDotsVertical size={18} />
+        </div>
+
       </div>
     </div>
   );

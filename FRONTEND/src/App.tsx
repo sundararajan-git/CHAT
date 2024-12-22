@@ -34,8 +34,8 @@ const App = () => {
       <Routes>
         <Route element={<AuthLayout isValidUser={isValidUser} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
         <Route element={<PublicLayout isValidUser={isValidUser} />}>
           <Route path="/signup" element={<SignUp />} />

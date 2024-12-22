@@ -11,7 +11,7 @@ const AuthLayout = (props: any) => {
   }
 
   return (
-    <div className="flex flex-col h-full dark:bg-dark">
+    <div className="flex flex-col h-screen dark:bg-dark">
       <NavBar />
       <Outlet />
     </div>

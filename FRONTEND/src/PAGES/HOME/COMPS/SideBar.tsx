@@ -1,47 +1,48 @@
 import userSvg from "../../../ASSETES/user.svg";
 
-const SideBar = () => {
+const SideBar = (props: any) => {
+  // PROPS
+  const { userClickHandler } = props;
   return (
-    <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
-      <div className="w-full p-3">
-        <div className="flex items-center gap-2">
-          <span className="font-medium hidden lg:block uppercase">Members</span>
-        </div>
-      </div>
-
-      <div className="overflow-y-auto w-full p-1.5">
+    <aside className="w-[90%] mx-auto h-full flex flex-col transition-all duration-200">
+      <div className="w-full h-full overflow-auto flex flex-col p-1.5 mt-12">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
           (user) => (
-            <button
+            <div
               key={user}
               className={`
-              w-full p-3 flex items-center gap-3
-              hover:bg-base-300 transition-colors
-              ${true ? "bg-base-300 ring-1 ring-base-300" : ""}
+              w-full p-3 flex items-center gap-3 transition-colors hover:bg-zinc-100 cursor-pointer rounded-xl fade-up border-b
             `}
+              onClick={userClickHandler}
             >
-              <div className="relative mx-auto lg:mx-0">
-                <img
-                  src={false || userSvg}
-                  alt={"user"}
-                  className="size-10 object-cover rounded-full"
-                />
-                {true && (
-                  <span
-                    className="absolute bottom-1 right-0 size-2 bg-green-500 
-                  rounded-full ring-2 ring-zinc-900"
-                  />
-                )}
-              </div>
+              <img
+                src={userSvg}
+                alt={"user"}
+                className="size-10 object-cover rounded-full h-fit"
+              />
 
-              {/* User info - only visible on larger screens */}
-              <div className="hidden lg:block text-left min-w-0">
-                <div className="font-medium truncate text-sm">{"Arun Kumar"}</div>
-                <div className="text-sm text-zinc-400">
-                  {true ? "Online" : "Offline"}
+              <div className="flex items-center justify-between gap-2 w-full">
+                <div className="w-1/2">
+                  <div className="font-medium truncate text-sm">
+                    {"Arun Kumar"}
+                  </div>
+                  <div className="text-sm text-zinc-400 truncate w-1/2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {/* Unde delectus necessitatibus enim, nihil nisi fugit modi,
+                    tempore, veniam nostrum accusamus ullam itaque ipsam? Odio
+                    repellat velit aut, exercitationem ea odit. */}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end justify-between text-xs">
+                  <span className="p-2 rounded-lg flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span className="text-green-500 font-semibold">Online</span>
+                  </span>
+                  <span className="text-gray-500">12/13/2024</span>
                 </div>
               </div>
-            </button>
+            </div>
           )
         )}
       </div>
