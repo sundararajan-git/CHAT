@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logosvg from "../../ASSETES/logo.svg";
 import { MdOutlineLockPerson, MdOutlineMail } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { validateForm } from "../../COMMON/Helper";
+import { validateForm } from "../../COMMON/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
 

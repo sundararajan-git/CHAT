@@ -6,7 +6,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import BtnLoader from "../../COMPONETNS/BtnLoader";
 import toast from "react-hot-toast";
-import { validateForm } from "../../COMMON/Helper";
+import { validateForm } from "../../COMMON/helper";
 
 const SignUp = () => {
   // CONTROL THE COMPONENT

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import logo from "../../ASSETES/logo.svg";
-import { validateForm } from "../../COMMON/Helper";
+import { validateForm } from "../../COMMON/helper";
 import { useState } from "react";
 import { MdOutlineLockPerson } from "react-icons/md";
 import BtnLoader from "../../COMPONETNS/BtnLoader";
