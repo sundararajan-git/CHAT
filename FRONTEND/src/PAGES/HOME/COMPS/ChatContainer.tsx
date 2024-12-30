@@ -22,7 +22,7 @@ const ChatContainer = (props: any) => {
   }
 
   return (
-    <div className="flex flex-col w-[80%] mx-auto h-full">
+    <div className="flex flex-col w-full sm:w-[80%] mx-auto h-full">
       <ChatHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

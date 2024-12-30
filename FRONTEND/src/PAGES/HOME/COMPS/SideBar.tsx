@@ -4,8 +4,8 @@ const SideBar = (props: any) => {
   // PROPS
   const { userClickHandler } = props;
   return (
-    <aside className="w-[90%] mx-auto h-full flex flex-col transition-all duration-200">
-      <div className="w-full h-full overflow-auto flex flex-col p-1.5 mt-12">
+    <aside className="w-fit sm:w-[90%] mx-auto h-full flex flex-col transition-all duration-200">
+      <div className="w-full h-full overflow-auto flex flex-col p-1.5 sm:mt-12">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
           (user) => (
             <div

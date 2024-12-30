@@ -33,22 +33,20 @@ const MessageInput = () => {
             className="w-full input border-gray-300 rounded-xl input-sm sm:input-md focus:outline-none focus:border-transparent focus:ring-1 focus:ring-green-400"
             placeholder="Type a message..."
           />
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            ref={fileInputRef}
-          />
+        
         </div>
 
         <button
           type="button"
-          className={`hidden sm:flex btn btn-sm btn-circle text-gray-400`}
+          className={`p-2 rounded-lg border-none bg-gray-100 text-gray-500`}
         >
           <BiImage size={20} />
         </button>
 
-        <button type="submit" className="btn btn-sm btn-circle border-gray-400 text-gray-400">
+        <button
+          type="submit"
+          className="p-2  rounded-lg bg-green-500 border-none text-white"
+        >
           <BiSend size={20} />
         </button>
       </form>
