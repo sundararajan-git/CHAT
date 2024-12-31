@@ -2,19 +2,23 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRoutes from "../SRC/ROUTES/userRoutes.js";
+
 import { connectDB } from "./DB/connectDB.js";
+import { app, server } from "./SCOKET/socket.js";
+
+import userRoutes from "../SRC/ROUTES/userRoutes.js";
+import chatsRoutes from "../SRC/ROUTES/chatRoutes.js";
+
 
 dotenv.config();
 
-const app = express();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 //  MIDDLEWEARES
 const corsOptions = {
   origin: "http://localhost:5173",
-  Credential: true,
+  credential: true,
   optionsSuccessStatus: 200,
 };
 
@@ -30,10 +34,10 @@ app.use(cookieParser());
 // USER ROUTES
 app.use('api/users', userRoutes);
 
-//  CHATS ROUTES
-// app.use("api/chat", () => {});
+// CHATS ROUTES
+app.use("api/chat", chatsRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectDB();
   console.log("Server is running on " + PORT);
 });

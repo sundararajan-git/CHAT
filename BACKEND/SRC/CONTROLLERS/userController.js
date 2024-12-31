@@ -103,6 +103,7 @@ export const login = async (req, res) => {
   }
 };
 
+// VERIFIY USER
 export const verifyEmail = async (req, res) => {
   try {
     const { code } = req.body;
@@ -270,6 +271,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+// CHECK IS VALID USER
 export const isValidUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
