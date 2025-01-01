@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-full">
       {!control?.chatpage ? (
         <SideBar userClickHandler={userClickHandler} />
       ) : (
@@ -35,15 +35,3 @@ const Home = () => {
 
 export default Home;
 
-{
-  /* <div className="h-screen bg-base-200">
-<div className="flex items-center justify-center p-4 h-full overflow-auto">
-  <div className="w-full h-[85vh]">
-    <div className="flex h-full rounded-lg overflow-hidden">
-      <SideBar />
-      {!true ? <NoChatSelected /> : <ChatContainer />}
-    </div>
-  </div>
-</div>
-</div> */
-}

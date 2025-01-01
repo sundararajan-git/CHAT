@@ -8,9 +8,9 @@ export const signUp = async (req, res) => {
   try {
     console.log(req.body);
 
-    const { name, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!fullName || !email || !password) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are required" });
@@ -31,11 +31,11 @@ export const signUp = async (req, res) => {
     ).toString();
 
     user = new User({
-      name,
+      fullName,
       email,
       password: hashedPassword,
       verificationToken,
-      verifactionExpireAt: Date.now() + 24 * 60 * 60 * 1000,
+      verificatonTokenExpireAt: Date.now() + 24 * 60 * 60 * 1000,
     });
 
     await user.save();
@@ -108,6 +108,8 @@ export const verifyEmail = async (req, res) => {
   try {
     const { code } = req.body;
 
+    console.log(code);
+
     if (!code) {
       return res
         .status(400)
@@ -116,16 +118,16 @@ export const verifyEmail = async (req, res) => {
 
     const user = await User.findOne({
       verificationToken: code,
-      verifactionExpireAt: { $gt: Date.now() },
+      verificatonTokenExpireAt: { $gt: Date.now() },
     });
 
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid code" });
     }
 
-    user.isVerfied = true;
+    user.isVerified = true;
     user.verificationToken = undefined;
-    user.verifactionExpireAt = undefined;
+    user.verificatonTokenExpireAt = undefined;
     await user.save();
 
     res.status(200).json({
@@ -241,7 +243,7 @@ export const resetPassword = async (req, res) => {
 // USER UPDATE PROFILE
 export const updateProfile = async (req, res) => {
   try {
-    const { name, password, profilePic, id } = req.body;
+    const { fullName, profilePic, id } = req.body;
 
     const user = await User.findById(id);
 
@@ -250,11 +252,10 @@ export const updateProfile = async (req, res) => {
         .status(400)
         .json({ success: false, message: "User not Found !" });
     }
-    const hashedPassword = await bcryptjs.hash(password, 10);
 
-    user.name = name;
-    user.password = hashedPassword;
-    user.profilePicture = profilePic;
+    user.fullName = fullName;
+    user.profilePic = profilePic;
+
     await user.save();
 
     generateTokenAndSetCookie(res, res._id);

@@ -1,6 +1,6 @@
 import express from "express"
-import { verifyToken } from "../MIDDLEWARE/validUser"
-import { getUsers, getMessage, sendMessage } from "../CONTROLLERS/messageController"
+import { verifyToken } from "../MIDDLEWARE/validUser.js"
+import { getUsers, getMessage, sendMessage } from "../CONTROLLERS/chatController.js"
 const router = express.Router()
 
 

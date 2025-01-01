@@ -9,15 +9,11 @@ import { Toaster } from "react-hot-toast";
 import Verification from "./PAGES/VERIFICATION/Verification";
 import ResetPassword from "./PAGES/RESETPASSWORD/ResetPassword";
 import AuthLayout from "./LAYOUTS/AuthLayout";
-import useValidUser from "./HOOK/useValidUser";
 import Loader from "./COMPONETNS/Loader";
 import PublicLayout from "./LAYOUTS/PublicLayout";
 import PageNotFound from "./PAGES/404/PageNotFound";
 
 const App = () => {
-  // VALIDATE FROM THE CUSTOM HOOK
-  // const { pageloading, isValidUser } = useValidUser();
-
   const pageloading = false;
   const isValidUser = !false;
 
