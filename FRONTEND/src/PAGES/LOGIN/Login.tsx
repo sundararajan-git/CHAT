@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logosvg from "../../ASSETES/logo.svg";
 import { MdOutlineLockPerson, MdOutlineMail } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { validateForm } from "../../COMMON/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { axiosInstance } from "../../LIB/axiosInstance";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
+import BtnLoader from "../../COMPONETNS/BtnLoader";
 
 const Login = () => {
   // CONTROL THE COMPONENT
@@ -13,8 +17,14 @@ const Login = () => {
     showpassword: false,
   });
 
+  // NAVIAGTE HOOK
+  const navigate = useNavigate();
+
+  //  DISPATCH FROM THE  REDUX
+  const dispatch = useDispatch();
+
   // SIGN IN HANDLER
-  const signInHandler = () => {
+  const signInHandler = async () => {
     try {
       const formElement = document.getElementById("singIn") as HTMLFormElement;
 
@@ -36,14 +46,23 @@ const Login = () => {
         return clone;
       });
 
-      toast.success("Sign in sucessfully");
+      const response = await axiosInstance.post("/users/login", formJson);
+
+      if (response?.data?.success) {
+        const { data } = response?.data;
+        dispatch(updateUser(data));
+        setTimeout(() => {
+          toast.success("Sign In Successfully");
+          navigate("/");
+        }, 1000);
+      }
     } catch (err) {
       const error = err as Error;
       console.error(error);
     }
   };
 
-  // PASSWORD SHOW THE HANDLER 
+  // PASSWORD SHOW THE HANDLER
   const showPasswordHandler = () => {
     try {
       setControl((prev: any) => {
@@ -80,6 +99,8 @@ const Login = () => {
                 </div>
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   className={`input border-gray-300 w-full pl-10 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-green-400 text-sm`}
                   placeholder="you@example.com"
                   required
@@ -97,12 +118,10 @@ const Login = () => {
                 </div>
                 <input
                   type={control?.showpassword ? "text" : "password"}
+                  id="password"
+                  name="password"
                   className={`input border-gray-300 w-full pl-10 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-green-400 text-sm`}
                   placeholder="••••••••"
-                  // value={formData.password}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, password: e.target.value })
-                  // }
                   required
                 />
                 <button
@@ -124,7 +143,8 @@ const Login = () => {
               className="btn bg-green-500 w-full hover:bg-green-600 border-none text-white"
               onClick={signInHandler}
             >
-              Sign in
+              {control?.btnlaoding ? <BtnLoader /> : null}
+              {control?.btnlaoding ? "Loading..." : "Sign in"}
             </button>
           </form>
 

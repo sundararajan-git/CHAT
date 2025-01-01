@@ -16,12 +16,12 @@ const PORT = process.env.PORT || 8080;
 //  MIDDLEWEARES
 const corsOptions = {
   origin: "http://localhost:5173",
-  credential: true,
+  credentials: true,
   optionsSuccessStatus: 200,
 };
 
 // ALLOWED ORIGINS
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // ALLOW THE JSON DATA
 app.use(express.json());

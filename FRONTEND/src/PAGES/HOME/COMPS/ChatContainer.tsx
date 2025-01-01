@@ -11,6 +11,19 @@ const ChatContainer = (props: any) => {
 
   const messageEndRef = useRef(null);
 
+  // BACK BTN HANDLER
+  const backBtnHandler = () => {
+    try {
+      console.log("clicking");
+      setControl((prev: any) => {
+        prev.chatpage = true;
+        return null;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (!true) {
     return (
       <div className="flex flex-col w-[80%] mx-auto h-full">
@@ -22,8 +35,9 @@ const ChatContainer = (props: any) => {
   }
 
   return (
-    <div className="flex flex-col w-full sm:w-[80%] mx-auto h-full">
-      <ChatHeader />
+    <div className="flex flex-col w-full sm:w-[80%] mx-auto h-[90vh] text-sm sm:text-base">
+
+      <ChatHeader backBtnHandler={backBtnHandler} />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(

@@ -4,6 +4,10 @@ import { validateForm } from "../../COMMON/helper";
 import toast from "react-hot-toast";
 import BtnLoader from "../../COMPONETNS/BtnLoader";
 import { MdOutlineLockPerson } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { axiosInstance } from "../../LIB/axiosInstance";
+import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
+import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
   // CONTROL THE COMPONENT
@@ -12,7 +16,10 @@ const Verification = () => {
   });
 
   //  DISPATCH FROM THE  REDUX
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  // NAVUGATE HOOK
+  const navigate = useNavigate();
 
   // VERIFICATION BTN HANDLER
   const vertificationHandler = async () => {
@@ -39,13 +46,16 @@ const Verification = () => {
 
       console.log(json);
 
-      // const response = await axiosInstance.post("/users/verify", json);
+      const response = await axiosInstance.post("/users/verify", json);
 
-      // if (response?.data?.success) {
-      //   toast.success("Verification Successfull");
-      //   const { data } = response?.data;
-      //   dispatch(updateUser({ ...data }));
-      // }
+      console.log(response)
+      
+      if (response?.data?.success) {
+        toast.success("Verification Successfull");
+        const { data } = response?.data;
+        dispatch(updateUser({ ...data }));
+        navigate("/");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -90,7 +100,6 @@ const Verification = () => {
             </button>
           </div>
         </form>
-        
       </div>
     </section>
   );

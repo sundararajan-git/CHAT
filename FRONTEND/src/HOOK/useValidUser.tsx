@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../LIB/axios";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../LIB/REDUX/SLICES/useSlice";
+import { axiosInstance } from "../LIB/axiosInstance";
 
 const useValidUser = () => {
   // STORE THE IS VALID USER NOT

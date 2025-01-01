@@ -1,5 +1,5 @@
 import { FiUser } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logosvg from "../../ASSETES/logo.svg";
 import { MdOutlineLockPerson, MdOutlineMail } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -7,13 +7,23 @@ import { useState } from "react";
 import BtnLoader from "../../COMPONETNS/BtnLoader";
 import toast from "react-hot-toast";
 import { validateForm } from "../../COMMON/helper";
+import { axiosInstance } from "../../LIB/axiosInstance";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
 
 const SignUp = () => {
+
   // CONTROL THE COMPONENT
   const [control, setControl] = useState({
     btnloading: false,
     showpassword: false,
   });
+
+  // NAVIAGTE HOOK
+  const navigate = useNavigate();
+
+  //  DISPATCH FROM THE  REDUX
+  const dispatch = useDispatch();
 
   // CREATE ACCOUNT HANDLER
   const createAccountHandler = async () => {
@@ -27,17 +37,31 @@ const SignUp = () => {
         return null;
       }
 
-      const formData = new FormData(formElement);
-      const formJson = Object.fromEntries(formData);
-
-      console.log(formJson);
-
       setControl((prev: any) => {
         const clone = { ...prev };
         clone.btnloading = true;
         return clone;
       });
-      toast.success("Account created !");
+   
+
+      const formData = new FormData(formElement);
+      const formJson = Object.fromEntries(formData);
+
+      console.log(formJson);
+
+
+      const response = await axiosInstance.post("/users/signup", formJson);
+
+      console.log(response);
+
+      if (response?.data?.success) {
+        const { data } = response?.data;
+        toast.success("Sign Up Successfully");
+        dispatch(updateUser({ ...data }));
+        navigate("/");
+      }
+
+  
     } catch (err) {
       const error = err as Error;
       console.error(error);
@@ -71,7 +95,7 @@ const SignUp = () => {
 
         <form className="space-y-2 text-sm" id="signup">
           <div className="form-control">
-            <label className="label cursor-pointer" htmlFor="name">
+            <label className="label cursor-pointer" htmlFor="fullName">
               <span className="label-text font-medium">Full Name</span>
             </label>
             <div className="relative">
@@ -81,8 +105,8 @@ const SignUp = () => {
               <input
                 type="text"
                 className="input border-gray-300 w-full pl-10 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-green-400 text-sm"
-                id="name"
-                name="name"
+                id="fullName"
+                name="fullName"
                 placeholder="Arun Kumar"
                 required
               />

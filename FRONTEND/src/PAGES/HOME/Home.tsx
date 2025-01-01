@@ -24,14 +24,13 @@ const Home = () => {
 
   return (
     <div className="w-full h-full">
-      {!control?.chatpage ? (
-        <SideBar userClickHandler={userClickHandler} />
-      ) : (
+      {control?.chatpage ? (
         <ChatContainer setControl={setControl} />
+      ) : (
+        <SideBar userClickHandler={userClickHandler} />
       )}
     </div>
   );
 };
 
 export default Home;
-

@@ -12,10 +12,11 @@ import AuthLayout from "./LAYOUTS/AuthLayout";
 import Loader from "./COMPONETNS/Loader";
 import PublicLayout from "./LAYOUTS/PublicLayout";
 import PageNotFound from "./PAGES/404/PageNotFound";
+import useValidUser from "./HOOK/useValidUser";
 
 const App = () => {
-  const pageloading = false;
-  const isValidUser = !false;
+  // VALIDATE FROM THE CUSTOM HOOK
+  const { pageloading, isValidUser } = useValidUser();
 
   if (pageloading) {
     return (
