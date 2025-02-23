@@ -12,7 +12,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* FOR LOADER CSS */
 .loader {
   width: 18px;
   height: 18px;
@@ -33,8 +32,6 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* ----------- FADE UP ------------ */
-
 .fade-up {
   animation: fadeUpAnimation ease-out 0.5s forwards;
 }
@@ -50,7 +47,6 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* ------- FOR MORE CONTENT TEXT ------ */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -59,11 +55,7 @@ input[type="number"]::-webkit-outer-spin-button {
   text-overflow: ellipsis;
 }
 
-/* --------------------- CUSTOM SCROLL BAR ----------------- */
-
-*{
+* {
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
 }
-
-

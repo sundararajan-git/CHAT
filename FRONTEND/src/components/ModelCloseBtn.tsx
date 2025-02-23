@@ -1,7 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 
 const ModelCloseBtn = (props: any) => {
-  // PROPS
   const { onClick } = props;
   return (
     <button

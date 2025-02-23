@@ -1,25 +1,21 @@
 import toast from "react-hot-toast";
-import logo from "../../ASSETES/logo.svg";
-import { validateForm } from "../../COMMON/helper";
+import logo from "../../assets/logo.svg";
+import { validateForm } from "../../common/helper";
 import { useState } from "react";
 import { MdOutlineLockPerson } from "react-icons/md";
-import BtnLoader from "../../COMPONETNS/BtnLoader";
+import BtnLoader from "../../components/BtnLoader";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const ResetPassword = () => {
-  // CONTROL THE COMPONENT
   const [control, setControl] = useState({
     btnloader: false,
     showpassword: false,
   });
 
-  //  USE DISPATCH
   // const dispatch = useDispatch();
 
-  // USE LOCATION
   // const location = useLocation();
 
-  // RESET BTN HANDLER
   const resetBtnHandler = async () => {
     try {
       const resetPasswordForm = document.getElementById(
@@ -60,7 +56,6 @@ const ResetPassword = () => {
     }
   };
 
-  // EYE ICON HANDLER
   const passwordShowHandler = () => {
     try {
       setControl((prev: any) => {

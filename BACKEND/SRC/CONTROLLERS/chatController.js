@@ -1,10 +1,10 @@
-import User from "../MODELS/userModel.js";
-import Message from "../MODELS/chatModel.js";
+import User from "../models/userModel.js";
+import Message from "../models/chatModel.js";
 
-// GET SIGN UPED USERS
+// get signuped users
 export const getUsers = async (req, res) => {
   try {
-    // GET USER ID
+    //  get user id
     const loginUserId = req.userId;
 
     if (!loginUserId) {
@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
         .json({ success: false, message: "User id not found" });
     }
 
-    // GET THE OTHER USERS
+    // get the other users
     const filteredUsers = await User.find({ _id: { $ne: loginUserId } }).select(
       "-password"
     );
@@ -30,7 +30,7 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// GET MESSAGES
+// get messages
 export const getMessage = async (req, res) => {
   try {
     const { id: reciveUserId } = req.params;
@@ -62,7 +62,7 @@ export const getMessage = async (req, res) => {
   }
 };
 
-// SEND MESSAGE
+// send messages
 export const sendMessage = async (req, res) => {
   try {
     const { id: reciveUserId } = req.params;
@@ -83,7 +83,7 @@ export const sendMessage = async (req, res) => {
         .json({ success: false, message: "message is required" });
     }
 
-    // STORE THE IMAGE IN CLOUDINARY
+    // store the image in cloudinary
     let imageURL;
 
     if (image) {

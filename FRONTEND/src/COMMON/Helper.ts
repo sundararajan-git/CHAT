@@ -1,5 +1,5 @@
 
-// VALIDATE THE FORMS
+// validate the forms
 export const validateForm = (form: any) => {
     try {
 
@@ -35,9 +35,7 @@ export const validateForm = (form: any) => {
 }
 
 
-
-// ------------  FOR NUMBER INPUT FILED SCROLL TO CHANGE PREVENT -------
-
+//  for number input filed scroll to change prevent
 export const handleWheel = (e: any) => {
     e.target.blur();
 };

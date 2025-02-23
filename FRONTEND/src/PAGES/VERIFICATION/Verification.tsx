@@ -1,27 +1,22 @@
 import { useState } from "react";
-import logo from "../../ASSETES/logo.svg";
-import { validateForm } from "../../COMMON/helper";
+import logo from "../../assets/logo.svg";
+import { validateForm } from "../../common/helper";
 import toast from "react-hot-toast";
-import BtnLoader from "../../COMPONETNS/BtnLoader";
+import BtnLoader from "../../components/BtnLoader";
 import { MdOutlineLockPerson } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { axiosInstance } from "../../LIB/axiosInstance";
-import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
+import { axiosInstance } from "../../lib/axiosInstance";
+import { updateUser } from "../../lib/redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
-  // CONTROL THE COMPONENT
   const [contol, setControl] = useState({
     btnloader: false,
   });
 
-  //  DISPATCH FROM THE  REDUX
   const dispatch = useDispatch();
-
-  // NAVUGATE HOOK
   const navigate = useNavigate();
 
-  // VERIFICATION BTN HANDLER
   const vertificationHandler = async () => {
     try {
       const verificationForm = document.getElementById(
@@ -48,8 +43,8 @@ const Verification = () => {
 
       const response = await axiosInstance.post("/users/verify", json);
 
-      console.log(response)
-      
+      console.log(response);
+
       if (response?.data?.success) {
         toast.success("Verification Successfull");
         const { data } = response?.data;

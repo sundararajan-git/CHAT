@@ -1,29 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import logosvg from "../../ASSETES/logo.svg";
+import logosvg from "../../assets/logo.svg";
 import { MdOutlineLockPerson, MdOutlineMail } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { validateForm } from "../../COMMON/helper";
+import { validateForm } from "../../common/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { axiosInstance } from "../../LIB/axiosInstance";
+import { axiosInstance } from "../../lib/axiosInstance";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
-import BtnLoader from "../../COMPONETNS/BtnLoader";
+import { updateUser } from "../../lib/redux/slices/userSlice";
+import BtnLoader from "../../components/BtnLoader";
 
 const Login = () => {
-  // CONTROL THE COMPONENT
   const [control, setControl] = useState({
     btnlaoding: false,
     showpassword: false,
   });
-
-  // NAVIAGTE HOOK
   const navigate = useNavigate();
-
-  //  DISPATCH FROM THE  REDUX
   const dispatch = useDispatch();
 
-  // SIGN IN HANDLER
   const signInHandler = async () => {
     try {
       const formElement = document.getElementById("singIn") as HTMLFormElement;
@@ -62,7 +56,6 @@ const Login = () => {
     }
   };
 
-  // PASSWORD SHOW THE HANDLER
   const showPasswordHandler = () => {
     try {
       setControl((prev: any) => {

@@ -1,15 +1,18 @@
 import { IoIosCall } from "react-icons/io";
-import userSvg from "../../../ASSETES/user.svg";
+import userSvg from "../../../assets/user.svg";
 import { IoChevronBackOutline, IoVideocamOutline } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
+
 const ChatHeader = (props: any) => {
   const { backBtnHandler } = props;
   return (
     <div className="p-2.5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-
-          <div className="p-2 hover:bg-gray-100 rounded cursor-pointer" onClick={backBtnHandler}>
+          <div
+            className="p-2 hover:bg-gray-100 rounded cursor-pointer"
+            onClick={backBtnHandler}
+          >
             <IoChevronBackOutline size={18} />
           </div>
 

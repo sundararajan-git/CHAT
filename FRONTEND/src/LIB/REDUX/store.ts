@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import user from "./SLICES/useSlice"
-import contacts from "./SLICES/contactsSlice.js";
-import message from "./SLICES/messageSlice.js"
-import socketReducer from "./SLICES/socketSlice.js"
+import user from "./slices/userSlice.js"
+import contacts from "./slices/contactsSlice.js";
+import message from "./slices/messageSlice.js"
+import socketReducer from "./slices/socketSlice.js"
 
 const store = configureStore({
   reducer: {

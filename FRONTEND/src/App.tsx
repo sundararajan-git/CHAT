@@ -1,21 +1,20 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./PAGES/HOME/Home";
-import SignUp from "./PAGES/SIGNUP/SignUp";
-import Login from "./PAGES/LOGIN/Login";
-import Settings from "./PAGES/SETTINGS/Settings";
-import Profile from "./PAGES/PROFILE/Profile";
 import { Toaster } from "react-hot-toast";
-import Verification from "./PAGES/VERIFICATION/Verification";
-import ResetPassword from "./PAGES/RESETPASSWORD/ResetPassword";
-import AuthLayout from "./LAYOUTS/AuthLayout";
-import Loader from "./COMPONETNS/Loader";
-import PublicLayout from "./LAYOUTS/PublicLayout";
-import PageNotFound from "./PAGES/404/PageNotFound";
-import useValidUser from "./HOOK/useValidUser";
+import Loader from "./components/Loader";
+import AuthLayout from "./layouts/AuthLayout";
+import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
+import Settings from "./pages/settings/Settings";
+import PublicLayout from "./layouts/PublicLayout";
+import SignUp from "./pages/signup/SignUp";
+import Login from "./pages/login/Login";
+import Verification from "./pages/verification/Verification";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
+import PageNotFound from "./pages/404/PageNotFound";
+import useValidUser from "./hook/useValidUser";
 
 const App = () => {
-  // VALIDATE FROM THE CUSTOM HOOK
   const { pageloading, isValidUser } = useValidUser();
 
   if (pageloading) {

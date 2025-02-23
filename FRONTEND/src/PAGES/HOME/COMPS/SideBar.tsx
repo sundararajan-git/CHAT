@@ -1,31 +1,24 @@
 import { useEffect, useState } from "react";
-import userSvg from "../../../ASSETES/user.svg";
-import Loader from "../../../COMPONETNS/Loader";
-import { axiosInstance } from "../../../LIB/axiosInstance";
+import userSvg from "../../../assets/user.svg";
+import Loader from "../../../components/Loader";
+import { axiosInstance } from "../../../lib/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../LIB/REDUX/store";
-import { setContacts } from "../../../LIB/REDUX/SLICES/contactsSlice";
-import { setOnlineUsers, setSocket } from "../../../LIB/REDUX/SLICES/socketSlice";
+import { RootState } from "../../../lib/redux/store";
+import { setContacts } from "../../../lib/redux/slices/contactsSlice";
+import {
+  setOnlineUsers,
+  setSocket,
+} from "../../../lib/redux/slices/socketSlice";
 import { io } from "socket.io-client";
 
-
 const SideBar = (props: any) => {
-  // PROPS
   const { userClickHandler } = props;
-
-  // GET PRODUCTS FROM THE GLOBALS STATE
+  const dispatch = useDispatch();
   const contacts = useSelector((state: RootState) => state.contacts);
-
   const user = useSelector((state: RootState) => state.user);
-
   const { socket, onlineUsers } = useSelector(
     (state: RootState) => state.socket
   );
-
-  // DISPATCH FROM REDUX
-  const dispatch = useDispatch();
-
-  // CONTROL THE COMPONENT
   const [control, setControl] = useState({
     pageLoading: true,
   });
@@ -90,16 +83,6 @@ const SideBar = (props: any) => {
     }
   };
 
-  // ---------------- TESTING AREA -----------------------
-
-
-  console.log(onlineUsers)
-
-  console.log(socket)
-
-  const arr = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
   return (
     <>
       {control?.pageLoading ? (

@@ -1,17 +1,14 @@
 import { useRef } from "react";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
-import MessageSkeleton from "./SKELETONS/MessageSkeleton";
-import userSvg from "../../../ASSETES/user.svg";
-import logo from "../../../ASSETES/logo.svg";
+import MessageSkeleton from "./skeletons/MessageSkeleton";
+import userSvg from "../../../assets/user.svg";
+import logo from "../../../assets/logo.svg";
 
 const ChatContainer = (props: any) => {
-  // PROPS
   const { setControl } = props;
-
   const messageEndRef = useRef(null);
 
-  // BACK BTN HANDLER
   const backBtnHandler = () => {
     try {
       console.log("clicking");
@@ -36,7 +33,6 @@ const ChatContainer = (props: any) => {
 
   return (
     <div className="flex flex-col w-full sm:w-[80%] mx-auto h-[90vh] text-sm sm:text-base">
-
       <ChatHeader backBtnHandler={backBtnHandler} />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

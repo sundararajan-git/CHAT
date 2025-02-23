@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { BiImage, BiSend, BiX } from "react-icons/bi";
-import logo from "../../../ASSETES/logo.svg";
+import logo from "../../../assets/logo.svg";
 
 const MessageInput = () => {
   const fileInputRef = useRef(null);
@@ -33,7 +33,6 @@ const MessageInput = () => {
             className="w-full input border-gray-300 rounded-xl input-sm sm:input-md focus:outline-none focus:border-transparent focus:ring-1 focus:ring-green-400"
             placeholder="Type a message..."
           />
-        
         </div>
 
         <button

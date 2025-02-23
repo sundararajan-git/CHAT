@@ -1,31 +1,25 @@
 import { FiUser } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import logosvg from "../../ASSETES/logo.svg";
+import logosvg from "../../assets/logo.svg";
 import { MdOutlineLockPerson, MdOutlineMail } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import BtnLoader from "../../COMPONETNS/BtnLoader";
+import BtnLoader from "../../components/BtnLoader";
 import toast from "react-hot-toast";
-import { validateForm } from "../../COMMON/helper";
-import { axiosInstance } from "../../LIB/axiosInstance";
+import { validateForm } from "../../common/helper";
+import { axiosInstance } from "../../lib/axiosInstance";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../../LIB/REDUX/SLICES/useSlice";
+import { updateUser } from "../../lib/redux/slices/userSlice";
 
 const SignUp = () => {
-
-  // CONTROL THE COMPONENT
   const [control, setControl] = useState({
     btnloading: false,
     showpassword: false,
   });
 
-  // NAVIAGTE HOOK
   const navigate = useNavigate();
-
-  //  DISPATCH FROM THE  REDUX
   const dispatch = useDispatch();
 
-  // CREATE ACCOUNT HANDLER
   const createAccountHandler = async () => {
     try {
       const formElement = document.getElementById("signup") as HTMLFormElement;
@@ -42,13 +36,11 @@ const SignUp = () => {
         clone.btnloading = true;
         return clone;
       });
-   
 
       const formData = new FormData(formElement);
       const formJson = Object.fromEntries(formData);
 
       console.log(formJson);
-
 
       const response = await axiosInstance.post("/users/signup", formJson);
 
@@ -60,15 +52,12 @@ const SignUp = () => {
         dispatch(updateUser({ ...data }));
         navigate("/");
       }
-
-  
     } catch (err) {
       const error = err as Error;
       console.error(error);
     }
   };
 
-  // EYE ICON HANDLER
   const passwordShowHandler = () => {
     try {
       setControl((prev: any) => {

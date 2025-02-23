@@ -1,10 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const PublicLayout = (props: any) => {
-  // PROPS
   const { isValidUser } = props;
 
-  // REDIRECT THE THE HOME PAGE
   if (isValidUser) {
     return <Navigate to="/" replace />;
   }

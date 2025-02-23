@@ -1,11 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import NavBar from "../COMPONETNS/NavBar";
+import NavBar from "../components/NavBar";
 
 const AuthLayout = (props: any) => {
-  // PROPS
   const { isValidUser } = props;
 
-  // PRODUCT THE HOMEPAGE
   if (!isValidUser) {
     return <Navigate to="/login" />;
   }

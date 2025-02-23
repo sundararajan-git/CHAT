@@ -1,9 +1,9 @@
-import User from "../MODELS/userModel.js";
+import User from "../models/userModel.js";
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
-import { generateTokenAndSetCookie } from "../UTILS/generateTokenAndSetCookies.js";
+import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookies.js";
 
-// USER SIGNUP
+// users signup
 export const signUp = async (req, res) => {
   try {
     console.log(req.body);
@@ -56,7 +56,7 @@ export const signUp = async (req, res) => {
   }
 };
 
-// USER LOGIN
+// user login
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -103,7 +103,7 @@ export const login = async (req, res) => {
   }
 };
 
-// VERIFIY USER
+// verifiy users
 export const verifyEmail = async (req, res) => {
   try {
     const { code } = req.body;
@@ -144,7 +144,7 @@ export const verifyEmail = async (req, res) => {
   }
 };
 
-// USER LOGOUT
+// user logout
 export const logout = async (req, res) => {
   try {
     res.clearCookie("token");
@@ -158,7 +158,7 @@ export const logout = async (req, res) => {
   }
 };
 
-// USER FORGOT PASSWORD
+// user forgot password
 export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
@@ -199,7 +199,7 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
-// USER RESET PASSWORD
+// user reset password
 export const resetPassword = async (req, res) => {
   try {
     const { password } = req.body;
@@ -240,7 +240,7 @@ export const resetPassword = async (req, res) => {
   }
 };
 
-// USER UPDATE PROFILE
+// user update profile
 export const updateProfile = async (req, res) => {
   try {
     const { fullName, profilePic, id } = req.body;
@@ -272,7 +272,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-// CHECK IS VALID USER
+// check is user valid
 export const isValidUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");

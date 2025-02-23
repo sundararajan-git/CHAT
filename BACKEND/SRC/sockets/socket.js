@@ -13,10 +13,10 @@ const io = new Server(server, {
   },
 });
 
-// STORE THE ONLINE USERS
+// store online users
 const userSockets = {};
 
-// GET RECEIVER SOCKET ID
+// get socket recvier id
 const getReceiverSocketId = (userId) => {
   return userSockets[userId];
 };

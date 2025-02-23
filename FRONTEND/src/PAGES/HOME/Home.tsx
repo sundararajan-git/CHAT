@@ -1,15 +1,13 @@
 import { useState } from "react";
-import ChatContainer from "./COMPS/ChatContainer";
-import NoChatSelected from "./COMPS/NoChatSelected";
-import SideBar from "./COMPS/SideBar";
+import ChatContainer from "./comps/ChatContainer";
+import NoChatSelected from "./comps/NoChatSelected";
+import SideBar from "./comps/SideBar";
 
 const Home = () => {
-  // CONTROL THE COMPOENT
   const [control, setControl] = useState({
-    chatpage: false,
+    chatpage: !false,
   });
 
-  // USER CLICK HANDLER
   const userClickHandler = () => {
     try {
       setControl((prev: any) => {

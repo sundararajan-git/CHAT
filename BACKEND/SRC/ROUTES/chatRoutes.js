@@ -1,16 +1,16 @@
 import express from "express"
-import { verifyToken } from "../MIDDLEWARE/validUser.js"
-import { getUsers, getMessage, sendMessage } from "../CONTROLLERS/chatController.js"
+import { verifyToken } from "../middleware/validUser.js"
+import { getUsers, getMessage, sendMessage } from "../controllers/chatController.js"
 const router = express.Router()
 
 
-// GET REGISTERED USERS
+// get registers user
 router.get("/user", verifyToken, getUsers)
 
-// GET USERS CHATS
+// get user chats
 router.get("/:id", verifyToken, getMessage)
 
-// SEND CHATS
+// send chats
 router.post("/send/:id", verifyToken, sendMessage)
 
 

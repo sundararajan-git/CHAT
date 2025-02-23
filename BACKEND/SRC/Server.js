@@ -2,38 +2,36 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
-import { connectDB } from "./DB/connectDB.js";
-import { app, server } from "./SCOKET/socket.js";
-
-import userRoutes from "./ROUTES/userRoutes.js";
-import chatsRoutes from "./ROUTES/chatRoutes.js";
+import { connectDB } from "./db/connectDB.js";
+import { app, server } from "./sockets/socket.js";
+import userRoutes from "./routes/userRoutes.js";
+import chatsRoutes from "./routes/chatRoutes.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 
-//  MIDDLEWEARES
+//  middlewares
 const corsOptions = {
   origin: "http://localhost:5173",
   credentials: true,
   optionsSuccessStatus: 200,
 };
 
-// ALLOWED ORIGINS
+// allowed origins
 app.use(cors(corsOptions));
 
-// ALLOW THE JSON DATA
+// allow json data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ENABLE COOKIES PARSING
+// enable cookis parsing
 app.use(cookieParser());
 
-// USER ROUTES
+// user routes
 app.use("/api/users", userRoutes);
 
-// CHATS ROUTES
+// chat routes
 app.use("/api/chat", chatsRoutes);
 
 server.listen(PORT, () => {

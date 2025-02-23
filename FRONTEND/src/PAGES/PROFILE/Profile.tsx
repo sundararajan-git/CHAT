@@ -1,6 +1,6 @@
 import { BiCamera } from "react-icons/bi";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import userSvg from "../../ASSETES/user.svg";
+import userSvg from "../../assets/user.svg";
 
 const Profile = () => {
   return (

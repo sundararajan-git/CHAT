@@ -10,32 +10,32 @@ import {
   updateProfile,
   verifyEmail,
   isValidUser,
-} from "../CONTROLLERS/userController.js";
+} from "../controllers/userController.js";
 
-import { verifyToken } from "../MIDDLEWARE/validUser.js";
+import { verifyToken } from "../middleware/validUser.js";
 
-// CHECK IS VALID USER OR NOT
+// check if user valid or not
 router.get("/isvaliduser", verifyToken, isValidUser);
 
-// USER RIGISTER
+// user register
 router.post("/signup", signUp);
 
-// USER VERIFICATION
+// user verification
 router.post("/verify", verifyEmail);
 
-//  USER LOGIN
+//  user login
 router.post("/login", login);
 
-// USER LOGOUT
+// user logout
 router.post("/logout", logout);
 
-// USER PROFILE UPDATE
+// user profile update
 router.put("/updateprofile", updateProfile);
 
-// USER PASSWORD UPDATE
+// user password update
 router.put("/resetpassword/:token", resetPassword);
 
-// USER FORGOT PASSWORD
+//  user forgot password
 router.post("/forgotpassword", forgotPassword);
 
 export default router;
