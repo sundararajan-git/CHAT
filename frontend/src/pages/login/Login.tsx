@@ -14,7 +14,6 @@ import logo from "../../assets/logo.svg";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [control, setControl] = useState({
     btnlaoding: false,
     showpassword: false,
@@ -36,7 +35,6 @@ const Login = () => {
 
       const formData = new FormData(formElement);
       const formJson = Object.fromEntries(formData);
-
       const { data } = await axiosInstance.post("/user/login", formJson);
 
       if (data?.success) {
@@ -54,14 +52,9 @@ const Login = () => {
   };
 
   const showPasswordHandler = () => {
-    try {
-      setControl((prev: any) => {
-        return { ...prev, showpassword: !prev.showpassword };
-      });
-    } catch (err) {
-      const error = err as Error;
-      console.error(error);
-    }
+    setControl((prev: any) => {
+      return { ...prev, showpassword: !prev.showpassword };
+    });
   };
 
   return (

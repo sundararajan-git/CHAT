@@ -13,18 +13,16 @@ import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { SlLock } from "react-icons/sl";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [control, setControl] = useState({
     btnloading: false,
     showpassword: false,
   });
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const createAccountHandler = async () => {
     try {
       const formElement = document.getElementById("signup") as HTMLFormElement;
-
       const isValidForm = validateForm(formElement);
 
       if (!isValidForm) {
@@ -35,16 +33,9 @@ const SignUp = () => {
       setControl((prev: any) => {
         return { ...prev, btnloading: true };
       });
-
       const formData = new FormData(formElement);
       const formJson = Object.fromEntries(formData);
-
-      console.log(formJson);
-
       const response = await axiosInstance.post("/user/signup", formJson);
-
-      console.log(response);
-
       if (response?.data?.success) {
         const { data } = response?.data;
         toast.success("Sign Up Successfully");
@@ -58,16 +49,9 @@ const SignUp = () => {
   };
 
   const passwordShowHandler = () => {
-    try {
-      setControl((prev: any) => {
-        const clone = { ...prev };
-        clone.showpassword = !prev.showpassword;
-        return clone;
-      });
-    } catch (err) {
-      const error = err as Error;
-      console.error(error);
-    }
+    setControl((prev: any) => {
+      return { ...prev, showpassword: !prev.showpassword };
+    });
   };
 
   return (

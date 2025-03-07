@@ -3,24 +3,15 @@ import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import userSvg from "../../../assets/user.svg";
-import logo from "../../../assets/logo.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../lib/redux/store";
 
 const ChatContainer = (props: any) => {
-  const { setControl, chats } = props;
+  const { chats, info } = props;
+  const { user } = useSelector((state: RootState) => state);
   const messageEndRef = useRef(null);
 
-  const backBtnHandler = () => {
-    try {
-      console.log("clicking");
-      setControl((prev: any) => {
-        prev.chatpage = true;
-        return null;
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+  const backBtnHandler = () => {};
   if (!true) {
     return (
       <div className="flex flex-col w-[80%] mx-auto h-full">
@@ -38,8 +29,10 @@ const ChatContainer = (props: any) => {
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {chats?.map((message: any) => (
           <div
-            key={message}
-            className={`chat ${message % 2 === 0 ? "chat-end" : "chat-start"}`}
+            key={message?._id}
+            className={`chat ${
+              message.senderId === user._id ? "chat-end" : "chat-start"
+            }`}
             ref={messageEndRef}
           >
             <div className=" chat-image avatar">
@@ -49,26 +42,23 @@ const ChatContainer = (props: any) => {
             </div>
             <div className="chat-header mb-1">
               <time className="text-xs opacity-50 ml-1">
-                {/* 12/12/2024 */}
-                5:00 PM
-                {/* {formatMessageTime(message.createdAt)} */}
+                {message?.createdAt.split("T")[0]}
               </time>
             </div>
             <div className="chat-bubble flex flex-col">
-              {/* {message % 2 === 0 && (
+              {message?.image && (
                 <img
-                  src={logo}
+                  src={message?.image}
                   alt="Attachment"
                   className="sm:max-w-[200px] rounded-md mb-2"
                 />
-              )} */}
+              )}
               <p>{message?.text}</p>
             </div>
           </div>
         ))}
       </div>
-
-      <MessageInput />
+      <MessageInput info={info} />
     </div>
   );
 };

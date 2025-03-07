@@ -79,21 +79,6 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-.fade-up {
-  animation: fadeUpAnimation ease-out 0.5s forwards;
-}
-
-@keyframes fadeUpAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;

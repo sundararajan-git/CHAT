@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./slices/userSlice.ts"
 import contacts from "./slices/contactsSlice.ts";
-import message from "./slices/messageSlice.ts"
+import messages from "./slices/messageSlice.ts"
 import socketReducer from "./slices/socketSlice.ts"
 import themeReduccer from "./slices/themeSlice.ts"
 
@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     user: user,
     contacts: contacts,
-    message: message,
+    messages: messages,
     socket: socketReducer,
     theme: themeReduccer
   },

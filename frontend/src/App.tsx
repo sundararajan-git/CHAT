@@ -17,11 +17,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "./lib/redux/store";
 
 const App = () => {
-  // const { pageloading, isValidUser1 } = useValidUser();
   const { pageloading, isValidUser } = useValidUser();
   const theme = useSelector((state: RootState) => state.theme);
-
-  // const isValidUser = false;
 
   if (pageloading) {
     return (
@@ -30,8 +27,6 @@ const App = () => {
       </div>
     );
   }
-
-  console.log(theme);
 
   return (
     <div className="w-full" data-theme={theme}>

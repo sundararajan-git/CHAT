@@ -10,12 +10,11 @@ import { updateUser } from "../../lib/redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [contol, setControl] = useState({
     btnloader: false,
   });
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const vertificationHandler = async () => {
     try {
@@ -24,7 +23,6 @@ const Verification = () => {
       ) as HTMLFormElement;
 
       const isValidForm = validateForm(verificationForm);
-
       if (!isValidForm) {
         toast.error("Invalid Inputs");
         return;
@@ -36,13 +34,7 @@ const Verification = () => {
 
       const data = new FormData(verificationForm);
       const json = Object.fromEntries(data);
-
-      console.log(json);
-
       const response = await axiosInstance.post("/users/verify", json);
-
-      console.log(response);
-
       if (response?.data?.success) {
         toast.success("Verification Successfull");
         const { data } = response?.data;

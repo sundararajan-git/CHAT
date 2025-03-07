@@ -5,17 +5,25 @@ import { axiosInstance } from "../../../lib/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../lib/redux/store";
 
-const MessageInput = () => {
+const MessageInput = (props: any) => {
+  const { info } = props;
   const fileInputRef = useRef(null);
   const { user } = useSelector((state: RootState) => state);
 
   const sendBtnHandler = async () => {
     try {
+      const msgInputEle = document.getElementById(
+        "msgInput"
+      ) as HTMLInputElement;
+
+      const reqData = {
+        text: msgInputEle?.value,
+        image: "",
+      };
+
       const { data } = await axiosInstance.post(
-        `/chat/send/${"67c870840ba67003ffa1c822"}`,
-        {
-          text: "hello",
-        }
+        `/chat/send/${info?.chatUserId}`,
+        reqData
       );
 
       console.log(data);
@@ -56,6 +64,7 @@ const MessageInput = () => {
           <input
             type="text"
             className="input"
+            id="msgInput"
             placeholder="Type a message..."
           />
         </div>

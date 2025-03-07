@@ -1,13 +1,48 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake, bumblebee, emerald,
-    corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest,
-    aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn,
-    business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+  themes: light, dark --prefersdark, cupcake, bumblebee, emerald, corporate,
+    synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua,
+    lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn,
+    business, acid, lemonade, night, coffee, winter, dim, nord, sunset,
+    ghost --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "ghost";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.003 247.858);
+  --color-base-200: oklch(96% 0.007 247.896);
+  --color-base-300: oklch(92% 0.013 255.508);
+  --color-base-content: oklch(20% 0.042 265.755);
+  --color-primary: oklch(12% 0.042 264.695);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(12% 0.042 264.695);
+  --color-secondary-content: oklch(98% 0.026 102.212);
+  --color-accent: oklch(12% 0.042 264.695);
+  --color-accent-content: oklch(97% 0.013 17.38);
+  --color-neutral: oklch(12% 0.042 264.695);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(71% 0.143 215.221);
+  --color-info-content: oklch(98% 0.019 200.873);
+  --color-success: oklch(72% 0.219 149.579);
+  --color-success-content: oklch(98% 0.018 155.826);
+  --color-warning: oklch(76% 0.188 70.08);
+  --color-warning-content: oklch(98% 0.022 95.277);
+  --color-error: oklch(64% 0.246 16.439);
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
 /*  customize the pre class Name */
-
 .input {
   @apply outline-none rounded-sm text-sm focus-within:ring-1 focus-within:ring-primary focus-within:border-transparent bg-transparent w-full;
 }

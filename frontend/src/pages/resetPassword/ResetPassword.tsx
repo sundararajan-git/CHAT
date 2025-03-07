@@ -12,10 +12,6 @@ const ResetPassword = () => {
     showpassword: false,
   });
 
-  // const dispatch = useDispatch();
-
-  // const location = useLocation();
-
   const resetBtnHandler = async () => {
     try {
       const resetPasswordForm = document.getElementById(
@@ -56,16 +52,9 @@ const ResetPassword = () => {
   };
 
   const passwordShowHandler = () => {
-    try {
-      setControl((prev: any) => {
-        const clone = { ...prev };
-        clone.showpassword = !prev.showpassword;
-        return clone;
-      });
-    } catch (err) {
-      const error = err as Error;
-      console.error(error);
-    }
+    setControl((prev: any) => {
+      return { ...prev, showpassword: !prev.showpassword };
+    });
   };
 
   return (
