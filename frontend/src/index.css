@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake, bumblebee, emerald,
+    corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest,
+    aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn,
+    business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+}
+
+/*  customize the pre class Name */
+
+.input {
+  @apply outline-none rounded-sm text-sm focus-within:ring-1 focus-within:ring-primary focus-within:border-transparent bg-transparent w-full;
+}
+
+.fieldset-legend {
+  @apply text-sm text-gray-500 font-normal;
+}
+
+.btn {
+  @apply btn-primary focus-within:outline-none;
+}
