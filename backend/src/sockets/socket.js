@@ -5,7 +5,7 @@ import http from "http";
 const app = express();
 const server = http.createServer(app);
 
-const whiteList = ["http://localhost:5173"]
+const whiteList = ["http://localhost:5173", "*"]
 
 const io = new Server(server, {
   cors: {
@@ -23,13 +23,15 @@ const io = new Server(server, {
 
 const userSockets = {};
 
-const getReceiverSocketId = (userId) => {
+export const getReceiverSocketId = (userId) => {
   return userSockets[userId];
 };
 
 io.on("connection", (socket) => {
 
   const userId = socket.handshake.query.userId;
+
+  console.log(`User connected: ${userId} -> ${socket.id}`); //
 
   if (userId) {
     userSockets[userId] = socket.id;

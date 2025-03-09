@@ -5,48 +5,19 @@ import { axiosInstance } from "../../../lib/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../lib/redux/store";
 import { setContacts } from "../../../lib/redux/slices/contactsSlice";
-import {
-  setOnlineUsers,
-  setSocket,
-} from "../../../lib/redux/slices/socketSlice";
-import { io } from "socket.io-client";
 
 const SideBar = (props: any) => {
   const { userClickHandler } = props;
+  const contacts = useSelector((state: RootState) => state.contacts);
   const dispatch = useDispatch();
-  const { contacts, user } = useSelector((state: RootState) => state);
-  const { socket, onlineUsers } = useSelector(
-    (state: RootState) => state.socket
-  );
+  const { onlineUsers } = useSelector((state: RootState) => state.socket);
   const [control, setControl] = useState({
     pageLoading: true,
   });
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8080", {
-      query: { userId: user._id },
-      withCredentials: true,
-    });
-
-    newSocket.on("connect", () => {
-      console.log("Socket connected:", newSocket.connected);
-      dispatch(setSocket({ connected: newSocket.connected }));
-    });
-
-    newSocket.on("getOnlineUsers", (users) => {
-      dispatch(setOnlineUsers(users));
-    });
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
     getUsers();
   }, []);
-
-  console.log(socket);
 
   const getUsers = async () => {
     try {
@@ -80,7 +51,7 @@ const SideBar = (props: any) => {
               <div
                 className="bg-lime-4001 flex gap-2 p-2 cursor-pointer hover:bg-gray-100 rounded-md"
                 key={item?._id}
-                onClick={() => userClickHandler(item?._id)}
+                onClick={() => userClickHandler(item)}
               >
                 <img
                   src={userSvg}

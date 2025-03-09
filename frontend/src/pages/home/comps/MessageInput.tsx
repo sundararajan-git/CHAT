@@ -1,14 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BiImage, BiSend, BiX } from "react-icons/bi";
 import logo from "../../../assets/logo.svg";
 import { axiosInstance } from "../../../lib/axiosInstance";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../lib/redux/store";
+import { useDispatch } from "react-redux";
+import { addMessage } from "../../../lib/redux/slices/messageSlice";
+import toast from "react-hot-toast";
+import BtnLoader from "../../../components/BtnLoader";
 
 const MessageInput = (props: any) => {
-  const { info } = props;
-  const fileInputRef = useRef(null);
-  const { user } = useSelector((state: RootState) => state);
+  const { chatUser } = props;
+  const dispatch = useDispatch();
+  const [actions, setActions] = useState({
+    btnLoading: false,
+  });
 
   const sendBtnHandler = async () => {
     try {
@@ -16,17 +20,31 @@ const MessageInput = (props: any) => {
         "msgInput"
       ) as HTMLInputElement;
 
+      if (msgInputEle?.value.trim() === "") {
+        toast.error("Invalid Message !");
+        return null;
+      }
+
       const reqData = {
         text: msgInputEle?.value,
         image: "",
       };
 
-      const { data } = await axiosInstance.post(
-        `/chat/send/${info?.chatUserId}`,
+      setActions((prev) => {
+        return { ...prev, btnLoading: true };
+      });
+
+      const { data, status } = await axiosInstance.post(
+        `/chat/send/${chatUser?._id}`,
         reqData
       );
 
-      console.log(data);
+      if (status === 200) {
+        dispatch(addMessage(data?.message));
+        setActions((prev) => {
+          return { ...prev, btnLoading: false };
+        });
+      }
     } catch (err) {
       console.error(err);
     }
@@ -68,13 +86,12 @@ const MessageInput = (props: any) => {
             placeholder="Type a message..."
           />
         </div>
-
         <button
           type="button"
           className="p-2 btn rounded-md"
           onClick={sendBtnHandler}
         >
-          <BiSend size={20} />
+          {actions?.btnLoading ? <BtnLoader /> : <BiSend size={20} />}
         </button>
       </form>
     </div>
