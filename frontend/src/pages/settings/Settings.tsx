@@ -17,7 +17,7 @@ const Settings = () => {
   const theme = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
   return (
-    <div className="h-screen container mx-auto px-20 py-4  overflow-auto">
+    <div className="h-screen container mx-auto px-4 sm:px-20 py-4  overflow-auto">
       <div className="flex flex-col sm:flex-row w-full gap-8">
         <div className="space-y-6 w-full">
           <div className="flex flex-col gap-1">

@@ -2,41 +2,35 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
-import AuthLayout from "./layouts/AuthLayout";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Settings from "./pages/settings/Settings";
-import PublicLayout from "./layouts/PublicLayout";
 import SignUp from "./pages/signup/SignUp";
 import Login from "./pages/login/Login";
 import Verification from "./pages/verification/Verification";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
+import { AuthContext } from "./context/AuthProvider";
+import { useContext } from "react";
 import PageNotFound from "./pages/404/PageNotFound";
-import useValidUser from "./hook/useValidUser";
-import { useSelector } from "react-redux";
-import { RootState } from "./lib/redux/store";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 const App = () => {
-  const { pageloading, isValidUser } = useValidUser();
-  const theme = useSelector((state: RootState) => state.theme);
+  const { pageLoading } = useContext(AuthContext);
 
-  if (pageloading) {
-    return (
-      <div className="flex items-center justify-center w-full h-screen">
-        <Loader />
-      </div>
-    );
+  if (pageLoading) {
+    return <Loader />;
   }
 
   return (
-    <div className="w-full" data-theme={theme}>
+    <>
       <Routes>
-        <Route element={<AuthLayout isValidUser={isValidUser} />}>
+        <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
-        <Route element={<PublicLayout isValidUser={isValidUser} />}>
+        <Route element={<PublicRoute />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verification" element={<Verification />} />
@@ -45,7 +39,7 @@ const App = () => {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    </>
   );
 };
 

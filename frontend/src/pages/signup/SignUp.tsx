@@ -1,18 +1,20 @@
 import { FiUser } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import logosvg from "../../assets/logo.svg";
 import { MdOutlineMail } from "react-icons/md";
 import { useState } from "react";
 import BtnLoader from "../../components/BtnLoader";
 import toast from "react-hot-toast";
-import { validateForm } from "../../common/helper";
+import { validateForm } from "../../utils/helper";
 import { axiosInstance } from "../../lib/axiosInstance";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../lib/redux/slices/userSlice";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { SlLock } from "react-icons/sl";
+import useJwtToken from "../../hook/useJwtToken";
+import { RiChatAiFill } from "react-icons/ri";
 
 const SignUp = () => {
+  const { setJwtToken } = useJwtToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [control, setControl] = useState({
@@ -37,10 +39,11 @@ const SignUp = () => {
       const formJson = Object.fromEntries(formData);
       const response = await axiosInstance.post("/user/signup", formJson);
       if (response?.data?.success) {
-        const { data } = response?.data;
         toast.success("Sign Up Successfully");
+        const { data, token } = response?.data;
+        setJwtToken(token);
         dispatch(updateUser({ ...data }));
-        navigate("/");
+        navigate("/verification");
       }
     } catch (err) {
       const error = err as Error;
@@ -59,7 +62,7 @@ const SignUp = () => {
       <div className="w-full max-w-sm space-y-8 p-12">
         <div className="text-center mb-2">
           <div className="flex flex-col items-center gap-2 group">
-            <img src={logosvg} alt="logo" />
+            <RiChatAiFill className="size-4 sm:size-6" />
             <h1 className="text-2xl font-bold mt-1">Create Account</h1>
             <p className="text-gray-400">Get started with your free account</p>
           </div>

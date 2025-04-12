@@ -3,8 +3,7 @@ import SideBar from "./comps/SideBar";
 import { axiosInstance } from "../../lib/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../lib/redux/store";
-import { useEffect, useMemo, useState } from "react";
-import logo from "../../assets/logo.svg";
+import { useEffect, useState } from "react";
 import { addMessage, setmessage } from "../../lib/redux/slices/messageSlice";
 import { io } from "socket.io-client";
 import { setOnlineUsers } from "../../lib/redux/slices/socketSlice";
@@ -13,10 +12,10 @@ const Home = () => {
   const messages = useSelector((state: RootState) => state.messages);
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const [socket, setSocket] = useState<any>(null);
   const [info, setInfo] = useState<any>({
     chatUser: null,
   });
-  const [socket, setSocket] = useState<any>(null);
 
   const userClickHandler = async (conatct: any) => {
     try {
@@ -42,13 +41,13 @@ const Home = () => {
       reconnectionDelay: 1000, // ✅ Wait 1 second before reconnecting
     });
 
-    newSocket.on("connect", () => {
-      console.log("Socket connected:", newSocket.id);
-    });
+    // newSocket.on("connect", () => {
+    //   console.log("Socket connected:", newSocket.id);
+    // });
 
-    newSocket.on("disconnect", () => {
-      console.log("Socket disconnected! Attempting to reconnect...");
-    });
+    // newSocket.on("disconnect", () => {
+    //   console.log("Socket disconnected! Attempting to reconnect...");
+    // });
 
     newSocket.on("getOnlineUsers", (users) => {
       dispatch(setOnlineUsers(users));
@@ -59,39 +58,37 @@ const Home = () => {
     return () => {
       newSocket.disconnect();
     };
-  }, [user._id, dispatch]); // ✅ Also include `dispatch`
+  }, [user._id, dispatch]);
 
   useEffect(() => {
     if (!socket) return;
-
-    console.log("Re-rendering & setting up socket listeners");
-
     socket.off("newMessage"); // Remove existing listener to prevent duplicates
     socket.on("newMessage", (message: any) => {
       dispatch(addMessage(message));
     });
-
     return () => {
       socket.off("newMessage"); // Cleanup when component unmounts
     };
   }, [messages, socket]);
 
-  console.log(socket);
-
   return (
-    <div className="w-full h-full">
-      <div className="w-full h-full flex flex-row">
-        <SideBar userClickHandler={userClickHandler} />
-        {messages?.length ? (
-          <ChatContainer chats={messages} chatUser={info?.chatUser} />
+    <>
+      <div className="block sm:hidden h-[93vh]">
+        {info?.chatUser ? (
+          <ChatContainer
+            chats={messages}
+            chatUser={info?.chatUser}
+            setInfo={setInfo}
+          />
         ) : (
-          <div className="w-full h-full flex flex-col gap-2 items-center justify-center">
-            <img src={logo} alt="logo" />
-            <p>No Chats..</p>
-          </div>
+          <SideBar userClickHandler={userClickHandler} />
         )}
       </div>
-    </div>
+      <div className="w-full h-[92vh] relative hidden sm:flex flex-row overflow-y-hidden">
+        <SideBar userClickHandler={userClickHandler} />
+        <ChatContainer chats={messages} chatUser={info?.chatUser} />
+      </div>
+    </>
   );
 };
 

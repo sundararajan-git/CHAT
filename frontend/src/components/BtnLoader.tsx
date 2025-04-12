@@ -1,5 +1,5 @@
 const BtnLoader = () => {
-    return <div className="loader"></div>;
-  };
-  
-  export default BtnLoader;
+  return <div className="btnloader"></div>;
+};
+
+export default BtnLoader;

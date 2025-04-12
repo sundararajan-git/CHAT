@@ -1,13 +1,20 @@
-import express from "express"
-import { verifyToken } from "../middleware/validUser.js"
-import { getUsers, getMessage, sendMessage } from "../controllers/chatController.js"
-const router = express.Router()
+import express from "express";
+import multer from "multer";
+import { verifyToken } from "../middleware/validUser.js";
+import {
+  getUsers,
+  getMessage,
+  sendMessage,
+} from "../controllers/chatController.js";
 
-router.get("/users", verifyToken, getUsers)
+const router = express.Router();
 
-router.get("/:id", verifyToken, getMessage)
+const upload = multer({ dest: "uploads/" });
 
-router.post("/send/:id", verifyToken, sendMessage)
+router.get("/users", verifyToken, getUsers);
 
+router.get("/:id", verifyToken, getMessage);
 
-export default router
+router.post("/send/:id", verifyToken, upload.single("file"), sendMessage);
+
+export default router;

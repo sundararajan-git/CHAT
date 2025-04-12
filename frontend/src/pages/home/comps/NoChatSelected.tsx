@@ -1,4 +1,4 @@
-import logoSvg from "../../../assets/logo.svg";
+import { RiChatAiFill } from "react-icons/ri";
 
 const NoChatSelected = () => {
   return (
@@ -6,7 +6,7 @@ const NoChatSelected = () => {
       <div className="max-w-md text-center space-y-6">
         <div className="flex justify-center gap-4 mb-4">
           <div className="relative">
-            <img src={logoSvg} alt="logo" className="animate-spin" />
+            <RiChatAiFill className="size-4 sm:size-6" />
           </div>
         </div>
         <h2 className="text-2xl font-bold">Welcome to Chat!</h2>

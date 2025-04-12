@@ -37,7 +37,8 @@ export const validateForm = (form: any) => {
 
 // show all errors
 export const showToast = (err: any) => {
-    toast.error(err)
+    console.log(err)
+    toast.error(err?.response?.data?.message ?? "Internal server error")
 }
 
 //  for number input filed scroll to change prevent

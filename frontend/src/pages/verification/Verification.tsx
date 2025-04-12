@@ -1,6 +1,5 @@
 import { useState } from "react";
-import logo from "../../assets/logo.svg";
-import { validateForm } from "../../common/helper";
+import { validateForm } from "../../utils/helper";
 import toast from "react-hot-toast";
 import BtnLoader from "../../components/BtnLoader";
 import { MdOutlineLockPerson } from "react-icons/md";
@@ -8,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { axiosInstance } from "../../lib/axiosInstance";
 import { updateUser } from "../../lib/redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { RiChatAiFill } from "react-icons/ri";
 
 const Verification = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Verification = () => {
 
       const data = new FormData(verificationForm);
       const json = Object.fromEntries(data);
-      const response = await axiosInstance.post("/users/verify", json);
+      const response = await axiosInstance.post("/user/verify", json);
       if (response?.data?.success) {
         toast.success("Verification Successfull");
         const { data } = response?.data;
@@ -50,7 +50,7 @@ const Verification = () => {
     <section className="flex items-center justify-center w-full h-screen">
       <div className="w-full sm:w-1/2 lg:w-1/4 h-fit p-4 sm:p-2  flex flex-col gap-4 font-sm">
         <div className="flex items-center pb-2 gap-2">
-          <img src={logo} />
+          <RiChatAiFill className="size-4 sm:size-6" />
           <h2 className="font-bold uppercase text-blue-1100 text-lg">Verify</h2>
         </div>
 

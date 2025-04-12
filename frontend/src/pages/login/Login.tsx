@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineMail } from "react-icons/md";
-import { validateForm } from "../../common/helper";
+import { showToast, validateForm } from "../../utils/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { axiosInstance } from "../../lib/axiosInstance";
@@ -9,9 +9,11 @@ import { updateUser } from "../../lib/redux/slices/userSlice";
 import BtnLoader from "../../components/BtnLoader";
 import { SlLock } from "react-icons/sl";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import logo from "../../assets/logo.svg";
+import useJwtToken from "../../hook/useJwtToken";
+import { RiChatAiFill } from "react-icons/ri";
 
 const Login = () => {
+  const { setJwtToken } = useJwtToken();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [control, setControl] = useState({
@@ -38,16 +40,17 @@ const Login = () => {
       const { data } = await axiosInstance.post("/user/login", formJson);
 
       if (data?.success) {
-        const { data: user } = data;
+        toast.success("Sign In Successfully");
+        const { data: user, token } = data;
+        setJwtToken(token);
         dispatch(updateUser(user));
+
         setTimeout(() => {
-          toast.success("Sign In Successfully");
           navigate("/");
         }, 1000);
       }
-    } catch (err) {
-      const error = err as Error;
-      console.error(error);
+    } catch (err: any) {
+      showToast(err);
     }
   };
 
@@ -63,7 +66,7 @@ const Login = () => {
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <img src={logo} alt="logo" />
+              <RiChatAiFill className="size-4 sm:size-6" />
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-gray-400">Sign in to your account</p>
             </div>

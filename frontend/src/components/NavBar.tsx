@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import logosvg from "../assets/logo.svg";
 import { GoHome } from "react-icons/go";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { PiGearSix } from "react-icons/pi";
+import { RiChatAiFill } from "react-icons/ri";
 
 const NavBar = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <header
       className="sticky w-full top-0 z-40 
-    backdrop-blur-lg p-1"
+    backdrop-blur-lg sm:pb-2 bg-red1-600"
     >
       <div className="container mx-auto px-4 h-12">
         <div className="flex items-center justify-between h-full">
@@ -20,8 +20,8 @@ const NavBar = () => {
               to="/"
               className="flex items-center gap-2.5 hover:opacity-80 transition-all"
             >
-              <img src={logosvg} alt="logo" />
-              <h1 className="text-lg font-bold text-primary">Chat</h1>
+              <RiChatAiFill className="size-4 sm:size-6" />
+              <h1 className="sm:text-lg font-bold text-primary">Chat</h1>
             </Link>
           </div>
 
@@ -33,8 +33,8 @@ const NavBar = () => {
                 path[1] === "" ? "tab-active text-primary" : ""
               } `}
             >
-              <GoHome />
-              <span>Home</span>
+              <GoHome className="size-5" />
+              <span className="hidden sm:block">Home</span>
             </Link>
             <Link
               to={"/profile"}
@@ -42,8 +42,8 @@ const NavBar = () => {
                 path[1] === "profile" ? "tab-active text-primary" : ""
               }`}
             >
-              <FaRegCircleUser />
-              <span>Profile</span>
+              <FaRegCircleUser className="size-4" />
+              <span className="hidden sm:block">Profile</span>
             </Link>
 
             <Link
@@ -52,8 +52,8 @@ const NavBar = () => {
                 path[1] === "settings" ? "tab-active text-primary" : ""
               }`}
             >
-              <PiGearSix />
-              <span>Settings</span>
+              <PiGearSix className="size-5" />
+              <span className="hidden sm:block">Settings</span>
             </Link>
           </div>
         </div>

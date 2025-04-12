@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
-import logo from "../../assets/logo.svg";
-import { validateForm } from "../../common/helper";
+import { validateForm } from "../../utils/helper";
 import { useState } from "react";
 import BtnLoader from "../../components/BtnLoader";
 import { SlLock } from "react-icons/sl";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { RiChatAiFill } from "react-icons/ri";
 
 const ResetPassword = () => {
   const [control, setControl] = useState({
@@ -61,7 +61,7 @@ const ResetPassword = () => {
     <section className="flex items-center justify-center w-full h-screen">
       <div className="w-full sm:w-1/2 lg:w-1/4 h-fit p-4 sm:p-2  flex flex-col gap-4 font-sm">
         <div className="flex items-center pb-2 gap-2">
-          <img src={logo} />
+          <RiChatAiFill className="size-4 sm:size-6" />
           <h2 className="font-bold uppercase text-blue-1100 text-lg">
             Reset Password
           </h2>
