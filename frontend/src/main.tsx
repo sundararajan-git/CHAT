@@ -1,4 +1,3 @@
-// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import App from "./App.tsx";
@@ -8,6 +7,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallBack from "./lib/error_boundary/ErrorFallback.tsx";
 import "./index.css";
 import { AuthProvider } from "./context/AuthProvider.tsx";
+// import { StrictMode } from "react";
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>

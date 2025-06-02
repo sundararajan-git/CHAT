@@ -6,14 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat</title>
     <script>
-      // Normalize URL by removing duplicate slashes
-      window.onload = function () {
-        let url = window.location.href;
-        let cleanUrl = url.replace(/([^:]\/)\/+/g, "$1"); // Remove duplicate slashes
+      // 1. Normalize duplicate slashes
+      (function () {
+        const url = window.location.href;
+        const cleanUrl = url.replace(/([^:]\/)\/+/g, "$1");
         if (url !== cleanUrl) {
-          window.history.replaceState(null, "", cleanUrl); // Update URL without reload
+          window.history.replaceState(null, "", cleanUrl);
         }
-      };
+      })();
+
+      // 2. Redirect /chats/something ➝ /chats/#/something
+      (function () {
+        const path = window.location.pathname;
+        const base = "/chats";
+
+        if (path.startsWith(base) && !window.location.hash) {
+          const subPath = path.slice(base.length); // like "/login" or "/profile"
+          const newUrl = `${base}/#${subPath}${window.location.search}${window.location.hash}`;
+          window.location.replace(newUrl);
+        }
+      })();
     </script>
   </head>
   <body>

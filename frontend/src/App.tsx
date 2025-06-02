@@ -12,8 +12,7 @@ import ResetPassword from "./pages/resetPassword/ResetPassword";
 import { AuthContext } from "./context/AuthProvider";
 import { useContext } from "react";
 import PageNotFound from "./pages/404/PageNotFound";
-import PrivateRoute from "./routes/PrivateRoute";
-import PublicRoute from "./routes/PublicRoute";
+import AccessRoute from "./routes/AccessRoute";
 
 const App = () => {
   const { pageLoading } = useContext(AuthContext);
@@ -25,17 +24,22 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route element={<PrivateRoute />}>
+        <Route element={<AccessRoute page={"private"} />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
-        <Route element={<PublicRoute />}>
+
+        <Route element={<AccessRoute page={"public"} />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/verification" element={<Verification />} />
           <Route path="/resetpassword/:id" element={<ResetPassword />} />
         </Route>
+
+        <Route element={<AccessRoute page={"inter"} />}>
+          <Route path="/verification" element={<Verification />} />
+        </Route>
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-right" reverseOrder={false} />

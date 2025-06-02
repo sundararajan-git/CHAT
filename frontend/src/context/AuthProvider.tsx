@@ -19,7 +19,7 @@ export const AuthContext = createContext<any>(null);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { getJwtToken } = useJwtToken();
   const token = getJwtToken();
-  const [isValidUser, setIsValidUser] = useState<boolean | null>(null);
+  const [isValidUser, setIsValidUser] = useState<string | null>(null);
   const [pageLoading, setPageLoading] = useState(true);
   const theme = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
@@ -45,8 +45,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (status === 200) {
         const { user } = data;
+        console.log("User data:", user);
         dispatch(updateUser(user));
-        setIsValidUser(user?.isVerfied ? true : false);
+        setIsValidUser(user?.isVerified ? "verified" : "unverified");
       }
     } catch (err: any) {
       setIsValidUser(null);
