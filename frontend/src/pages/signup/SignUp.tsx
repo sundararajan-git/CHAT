@@ -4,7 +4,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { useState } from "react";
 import BtnLoader from "../../components/BtnLoader";
 import toast from "react-hot-toast";
-import { validateForm } from "../../utils/helper";
+import { showErrorToast, validateForm } from "../../utils/helper";
 import { axiosInstance } from "../../lib/axiosInstance";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../lib/redux/slices/userSlice";
@@ -46,8 +46,17 @@ const SignUp = () => {
         navigate("/verification");
       }
     } catch (err) {
-      const error = err as Error;
-      console.error(error);
+      showErrorToast(err);
+    } finally {
+      setControl((prev: any) => {
+        return { ...prev, btnloading: false };
+      });
+    }
+  };
+
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") {
+      createAccountHandler();
     }
   };
 
@@ -68,7 +77,11 @@ const SignUp = () => {
           </div>
         </div>
 
-        <form className="space-y-2 text-sm" id="signup">
+        <form
+          className="space-y-2 text-sm"
+          id="signup"
+          onKeyDown={onKeyDownHandler}
+        >
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Full Name</legend>
             <label className="input input-md" id="fullName">
@@ -124,6 +137,7 @@ const SignUp = () => {
               type="button"
               className="btn w-full"
               onClick={createAccountHandler}
+              disabled={control.btnloading}
             >
               {control.btnloading && <BtnLoader />}
               {control.btnloading ? "Loading..." : "Create Account"}

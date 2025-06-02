@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineMail } from "react-icons/md";
-import { showToast, validateForm } from "../../utils/helper";
+import { showErrorToast, validateForm } from "../../utils/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { axiosInstance } from "../../lib/axiosInstance";
@@ -44,13 +44,20 @@ const Login = () => {
         const { data: user, token } = data;
         setJwtToken(token);
         dispatch(updateUser(user));
-
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+        navigate("/");
       }
     } catch (err: any) {
-      showToast(err);
+      showErrorToast(err);
+    } finally {
+      setControl((prev: any) => {
+        return { ...prev, btnlaoding: false };
+      });
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      signInHandler();
     }
   };
 
@@ -72,7 +79,7 @@ const Login = () => {
             </div>
           </div>
 
-          <form className="space-y-2" id="singIn">
+          <form className="space-y-2" id="singIn" onKeyDown={handleKeyDown}>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Email</legend>
               <label className="input" id="email">
@@ -115,6 +122,7 @@ const Login = () => {
               type="button"
               className="btn w-full mt-4"
               onClick={signInHandler}
+              disabled={control?.btnlaoding}
             >
               {control?.btnlaoding ? <BtnLoader /> : null}
               {control?.btnlaoding ? "Loading..." : "Sign in"}

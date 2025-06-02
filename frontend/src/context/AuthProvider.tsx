@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../lib/axiosInstance";
 import { updateUser } from "../lib/redux/slices/userSlice";
 import { RootState } from "../lib/redux/store";
-import { showToast } from "../utils/helper";
+import { showErrorToast } from "../utils/helper";
 
 export const AuthContext = createContext<any>(null);
 
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (err: any) {
       setIsValidUser(null);
-      showToast(err);
+      showErrorToast(err);
     } finally {
       setPageLoading(false);
     }

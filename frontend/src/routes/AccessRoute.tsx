@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Navigate, Outlet } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 type AccessRouteShape = {
   page?: "public" | "private" | "inter";
@@ -18,7 +19,8 @@ const AccessRoute: React.FC<AccessRouteShape> = (props) => {
     return <Navigate to="/" replace />;
   } else {
     return (
-      <div className="flex flex-col h-full  dark:bg-dark">
+      <div className="flex flex-col h-screen dark:bg-dark">
+        <NavBar />
         <Outlet />
       </div>
     );

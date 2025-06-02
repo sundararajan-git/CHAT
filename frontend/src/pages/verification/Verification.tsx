@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { validateForm } from "../../utils/helper";
+import { showErrorToast, validateForm } from "../../utils/helper";
 import toast from "react-hot-toast";
 import BtnLoader from "../../components/BtnLoader";
 import { MdOutlineLockPerson } from "react-icons/md";
@@ -9,6 +9,7 @@ import { updateUser } from "../../lib/redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { RiChatAiFill } from "react-icons/ri";
 
+//
 const Verification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,10 +43,19 @@ const Verification = () => {
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      showErrorToast(err);
+    } finally {
+      setControl((prev: any) => {
+        return { ...prev, btnloader: false };
+      });
     }
   };
 
+  const formKeyDownHandler = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") {
+      vertificationHandler();
+    }
+  };
   return (
     <section className="flex items-center justify-center w-full h-screen">
       <div className="w-full sm:w-1/2 lg:w-1/4 h-fit p-4 sm:p-2  flex flex-col gap-4 font-sm">
@@ -54,7 +64,11 @@ const Verification = () => {
           <h2 className="font-bold uppercase text-blue-1100 text-lg">Verify</h2>
         </div>
 
-        <form id="verificationForm" className="flex flex-col gap-6 w-full">
+        <form
+          id="verificationForm"
+          className="flex flex-col gap-6 w-full"
+          onKeyDown={formKeyDownHandler}
+        >
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Code</legend>
             <label className="input" id="code">
@@ -73,6 +87,7 @@ const Verification = () => {
               type="button"
               className="btn"
               onClick={vertificationHandler}
+              disabled={contol?.btnloader}
             >
               {contol?.btnloader ? <BtnLoader /> : null}
               {contol?.btnloader ? "Loading..." : "Submit"}

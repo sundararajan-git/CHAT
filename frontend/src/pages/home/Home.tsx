@@ -73,7 +73,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="block sm:hidden h-[93vh]">
+      <div className="block sm:hidden h-full">
         {info?.chatUser ? (
           <ChatContainer
             chats={messages}
@@ -84,7 +84,7 @@ const Home = () => {
           <SideBar userClickHandler={userClickHandler} />
         )}
       </div>
-      <div className="w-full h-[92vh] relative hidden sm:flex flex-row overflow-y-hidden">
+      <div className="w-full h-full relative hidden sm:flex flex-row overflow-y-hidden">
         <SideBar userClickHandler={userClickHandler} />
         <ChatContainer chats={messages} chatUser={info?.chatUser} />
       </div>
